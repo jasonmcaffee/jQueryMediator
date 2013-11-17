@@ -6,7 +6,7 @@ This project provides a jQuery API mediator that can be used in a manner that is
 
 ## Try it out!
 Visit this link and click Project->Fork to try it out yourself:
-https://codio.com/jasonmcaffee/jQueryMediator/master/tree/test/jquery-mediator-spec.js
+https://codio.com/jasonmcaffee/jQueryMediator/master/tree/test/jQueryMediator-spec.js
 
 ## Usage
 You can use the jQueryMediator in any way you see fit.
@@ -132,7 +132,7 @@ https://github.com/apache/tapestry-5/blob/5.4-js-rewrite/tapestry-core/src/main/
 ### Specs
 You can run the tests by visiting the [test](../preview/test.html) page.
 
-You can see the specs here: [jquery-mediator-spec.js](test/jquery-mediator-spec.js).
+You can see the specs here: [jQueryMediator-spec.js](test/jQueryMediator-spec.js).
 
 ### [jQueryMediator](src/js/base/vendor-mediator/jQueryMediator.js)
 Provides the mediator for the jQuery function and mediator for the jQuery result object.

@@ -3,9 +3,10 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
 
     //test that our assumptions about how the mediator works are correct.
     //I do not intend on testing every function here, just enough to ensure that the mediator acting appropriately as a passthrough.
-    describe("jQueryMediator configuration", function(){
+    describe("jQueryMediator - Configuration", function(){
         it("should allow configuration to be set at runtime", function(){
-            $._setConfig({
+
+            $.mediator.setConfig({
                 //array of function names for functions that allow chaining.
                 allowedChainedFunctions: [
                     'find',
@@ -47,6 +48,10 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
                 //e.g. $('#someEl')[0]
                 provideAccessToDomElementArray: true,
 
+                //when you need functionality other than the default pass through to jquery, you can
+                //add an explicit function here.
+                //when you return a jquery result object, you should first wrap it with the mediator via $.mediator.mediateJQueryResult($result)
+                //so that only the allowed functions
                 explicitFunctions:{
                     //we explicitly define functions that are sometimes chainable.
                     //(this could also probably be done by checking if the result is an instance of jquery object)
@@ -54,7 +59,8 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
                     html: function(newHtml){
                         if(newHtml){ //chainable
                             var $result = this._$el.html(newHtml);
-                            return $.mediator.mediateJQueryResult($result);//chained result shouldn't allow functions we dont allow
+                            //chained result shouldn't allow functions we dont allow
+                            return $.mediator.mediateJQueryResult($result);
                         }
                         return this._$el.html();
                     },
@@ -68,6 +74,9 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
                     }
                 }
             });
+
+            //test some of our configured functions
+            expect($.ajax).toBeDefined();
         });
     });
 });

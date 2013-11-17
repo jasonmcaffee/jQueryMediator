@@ -26,8 +26,9 @@ define([
     'core', 
     'jasmine', 
     'jasmine-html', 
-    '../../test/jquery-mediator-spec'
-], function($, core, jasmine, jasmineHtml, jqueryMediatorSpec){
+    '../../test/jQueryMediator-spec',
+    '../../test/jQueryMediator-configuration-spec' //should be last since it freezes config
+], function($, core, jasmine, jasmineHtml, jQueryMediatorSpec, jQueryMediatorConfigurationSpec){
     core.log('test main module loaded'); 
 
     var env = jasmine.getEnv();

@@ -3,7 +3,7 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
 
     //test that our assumptions about how the mediator works are correct.
     //I do not intend on testing every function here, just enough to ensure that the mediator acting appropriately as a passthrough.
-    describe("jquery mediator", function(){
+    describe("jQueryMediator - Mediated API", function(){
         it("should support html", function(){
             var test1Html = $('#htmlTest1').html(); 
             expect(test1Html).toEqual('html test 1');
