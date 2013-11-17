@@ -216,9 +216,13 @@ https://github.com/apache/tapestry-5/blob/5.4-js-rewrite/tapestry-core/src/main/
 ## Code Overview
 
 ### Specs
-You can run the tests by visiting the [test](../preview/test.html) page.
+You can run the tests by visiting the [test](https://codio.com/jasonmcaffee/jQueryMediator/master/preview/test.html) page on codio.
 
-You can see the specs here: [jQueryMediator-spec.js](test/jQueryMediator-spec.js).
+You can see the specs here:
+
+[jQueryMediator-spec.js](test/jQueryMediator-spec.js)
+
+[jQueryMediator-configuration-spec.js](test/jQueryMediator-configuration-spec.js)
 
 ### [jQueryMediator](src/js/base/vendor-mediator/jQueryMediator.js)
 Provides the mediator for the jQuery function and mediator for the jQuery result object.
