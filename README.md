@@ -52,21 +52,66 @@ $.mediator.setConfig({
         'find',
         'hasClass'
     ],
-    //allowed Props
+    //allowed Properties
     //default is []
-    allowedProps:[
+    allowedProperties:[
         'length'
     ],
     //default is []
     allowedJQueryFunctionProperties:[
         'ajax'
-    ]
+    ],
+     //in explicit functions, 'this' is the mediatedQueryObject.
+    //you also have access to the underlying jquery object via this._$el
+    //returned jquery instances should be first wrapped with $.mediator.mediateJQueryResult so that chained
+    //functions only have access to functions you allow.
+    explicitFunctions:{
+        //demonstrates a custom each replacement
+        each: function(iterationCallback){
+            for(var i=0; i < this.length; ++i){
+                var item = this[i];
+                iterationCallback(i, item);
+            }
+        },
+        //demonstrate an explicit function which wraps jquery results with a mediated jquery object.
+        attr: function(name, value){
+            //pass the correct number of parameters
+            var result = typeof value == "undefined" ? this._$el.attr(name) : this._$el.attr(name, value);
+            //when the result is an instance of jquery e.g. $el
+            //we wrap the jquery instance with the mediator so that only functions we allow are available
+            //during chaining.
+            if(result instanceof jquery){
+                result = $.mediator.mediateJQueryResult(result);
+            }
+            return result;
+        }
+    }
 });
 ```
 
 ### Advanced Configuration
 All advanced configuration options have a underscore '_' prefix.
-
+#### Overriding how mediated functions are defined
+```javascript
+$.mediator.setConfig({
+    //'this' is the configuration object.
+    //creates the _MediatorQueryObject.prototype[funcName] function.
+    //by default the mediated function will act as a pass through to the underlying jQuery function.
+    //if the result of the jquery function is an instance of jQuery, the result is wrapped with jQueryMediator before it is returned.
+    //if the result is not an instance of jQuery, the unmodified result is returned.
+    _createPrototypeFunction: function (funcName){
+        this._MediatedQueryObject.prototype[funcName] = function(){
+            //{put your own custom logic/functionality here. }
+            var result = this._$el[funcName].apply(this._$el, arguments);
+            if(result instanceof $){  //chained results should only have functions we allow.
+                result = jQueryMediator.mediator.mediateJQueryResult(result);
+            }
+            return result;
+        };
+    }
+})
+```
+More documentation coming soon. You can look at the default configuration in src to see how you can override default behavior.
 
 ## Reasons to use a Mediator
 ### Switching out third party libraries

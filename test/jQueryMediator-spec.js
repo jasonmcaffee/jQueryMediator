@@ -16,6 +16,8 @@ define(['jquery', 'core', 'jasmine', '../dist/jQueryMediator-0.0.1-requirejs-sup
         ],
         //in explicit functions, 'this' is the mediatedQueryObject.
         //you also have access to the underlying jquery object via this._$el
+        //returned jquery instances should be first wrapped with $.mediator.mediateJQueryResult so that chained
+        //functions only have access to functions you allow.
         explicitFunctions:{
             //demonstrates a custom each replacement
             each: function(iterationCallback){
