@@ -1,4 +1,4 @@
-define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], function(jquery, core, jasmine, $){
+define(['jquery', 'core', 'jasmine', '../dist/jQueryMediator-0.0.1-requirejs-support.min'], function(jquery, core, jasmine, $){
     core.log('jquery mediator spec module loaded');
 
     //test that our assumptions about how the mediator works are correct.

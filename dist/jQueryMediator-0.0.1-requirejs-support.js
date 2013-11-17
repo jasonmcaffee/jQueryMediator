@@ -1,4 +1,5 @@
-(function($){
+define(['jquery'], function($){
+return (function($){
     //allows config to be frozen i.e. not be modified any further.
     var isConfigFrozen = false;
 
@@ -153,3 +154,4 @@
     window.jQueryMediator = jQueryMediator;
     return jQueryMediator;    
 })($);
+});
