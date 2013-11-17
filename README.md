@@ -124,13 +124,6 @@ Skeuomorphism is the way to go! No wait, flat UI is the latest rage!
 You can usually expect a major UI overhaul every few years.
 If you're going to change major underlying libraries, this is likely the best time to do it.
 
-### No one is going to pay you to switch out libraries
-Things you are unlikely to hear:
-
-Business Person: "I think we could sell more stuff by using YUI instead of JQuery."
-
-Customer: "I wish you guys would use Backbone instead of Angular"
-
 ## Its a tough decision
 If you do decide to use a mediator, make it easy to use, and preferably with a familiar API!
 
@@ -199,5 +192,5 @@ No. It takes 30 seconds to explain:
 "We use a mediator for jQuery. The API is very similar, but can differ in some cases. Check the specs when you are unsure or run into issues."
 ### Does it make sense to mimic the jQuery API?
 Yes. 
-1. The jQuery API is truly awesome. It is unlikely that you will write a better one.
-2. Most everyone is familiar with the jQuery API.  Do you really want to spend time training devs on your hand rolled dom api?
+* The jQuery API is truly awesome. It is unlikely that you will write a better one.
+* Most everyone is familiar with the jQuery API.  Do you really want to spend time training devs on your hand rolled dom api?
