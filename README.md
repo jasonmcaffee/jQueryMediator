@@ -11,6 +11,8 @@ https://codio.com/jasonmcaffee/jQueryMediator/master/tree/test/jQueryMediator-sp
 ## Usage
 You can use the jQueryMediator in any way you see fit.
 
+Note: usage examples assume jQueryMediator has already been configured. See Configuration section.
+
 Here are a few usage examples.
 ### Functionaly scoped jQueryMediator as $
 ```javascript
@@ -31,6 +33,40 @@ define(['jQueryMediator'], function($){
     $('#someSelector').find('.some-el').html();
 });
 ```
+## Configuration
+jQueryMediator is completely customizable and extensible.
+You can override any functionality with your own.
+
+### Basic Configuration
+Note: in the configuration examples, it is assumed that $ == jQueryMediator.
+
+#### Whitelisting allowed functions and properties
+You can whitelist the allowed properties and functions of the mediated jQuery result object and the jQuery function.
+
+```javascript
+$.mediator.setConfig({
+    //allowed jQuery result functions. e.g. $('#someEl').find('.some-class').html()
+    //default is []
+    allowedFunctions:[
+        'html',
+        'find',
+        'hasClass'
+    ],
+    //allowed Props
+    //default is []
+    allowedProps:[
+        'length'
+    ],
+    //default is []
+    allowedJQueryFunctionProperties:[
+        'ajax'
+    ]
+});
+```
+
+### Advanced Configuration
+All advanced configuration options have a underscore '_' prefix.
+
 
 ## Reasons to use a Mediator
 ### Switching out third party libraries
@@ -144,15 +180,15 @@ requires the spec and runs jasmine
 The other src/js code is simply there to mimic a typical project scaffold.
 
 ## Performance
-Performance for jQueryMediator is awesome.  Performance is nearly identical to using jQuery directly.
+Performance for jQueryMediator is awesome.  Performance is only slightly slower than using jQuery directly.
 
-http://jsperf.com/jquery-mediator-vs-jquery/3
+http://jsperf.com/jquery-mediator-vs-jquery/4
 
 ## Compatibility
 jQueryMediator is written in vanilla javascript, and should work in all browsers supported by the version of jquery you are using.
 
 ## Dependencies
-Currently dependent on requirejs, but a non requirejs version should be available soon.
+Currently dependent on jquery and requirejs, but a non requirejs version should be available soon.
 
 In the meantime you can simply replace the requirejs define with an IIFE that passes in jQuery.
 

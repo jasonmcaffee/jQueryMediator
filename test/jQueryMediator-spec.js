@@ -1,6 +1,21 @@
 define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], function(jquery, core, jasmine, $){
     core.log('jquery mediator spec module loaded'); 
 
+    //first configure the mediator to expose only the functions we allow, etc.
+    $.mediator.setConfig({
+        allowedFunctions:[
+            'html',
+            'find',
+            'hasClass'
+        ],
+        allowedProps:[
+            'length'
+        ],
+        allowedJQueryFunctionProperties:[
+            'ajax'
+        ]
+    });
+
     //test that our assumptions about how the mediator works are correct.
     //I do not intend on testing every function here, just enough to ensure that the mediator acting appropriately as a passthrough.
     describe("jQueryMediator - Mediated API", function(){

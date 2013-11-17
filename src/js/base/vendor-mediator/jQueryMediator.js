@@ -7,30 +7,18 @@ define(['jquery'], function($){
     var isConfigFrozen = false;
     var defaults = {
         //array of function names for functions that allow chaining.
-        allowedChainedFunctions: [
-            'find',
-            'addClass',
-            'removeClass',
-            'toggleClass',
-            'append',
-            'appendTo',
-            'remove',
-            'show',
-            'hide'
-        ],
+        allowedChainedFunctions: [], //['find', 'addClass', 'removeClass', 'toggleClass', 'append', 'appendTo', 'remove', 'show', 'hide' ],
         //array of function names for functions that do not allow chaining.
-        allowedNonChainedFunctions: [
-            'hasClass'
-        ],
-        //exposed properties from the jquery object. 
-        allowedProps: [
-            'length'  //$('#someEl').length    
-        ],
+        allowedNonChainedFunctions: [], //[ 'hasClass' ],
+        //when the result is an instance of jQuery, wraps result with jQueryMediator so chained functions only get allowed functions.
+        //if not an instance of jquery, unmodified result
+        allowedFunctions: [], //['html'],
+        //exposed properties from the jquery object.
+        //$('#someEl').length
+        allowedProps: [], //[ 'length' ],
         //exposed functions and properties from the jquery function.
-        allowedJQueryFunctionProperties: [
-            'data',
-            'ajax'  //$.ajax({...}).done(function(){...})
-        ],
+        //$.ajax({...}).done(function(){...})
+        allowedJQueryFunctionProperties: [], //['data', 'ajax'],
         //e.g. $('#someEl')[0]
         provideAccessToDomElementArray: true,
 
@@ -39,25 +27,25 @@ define(['jquery'], function($){
         explicitFunctions:{
             //we explicitly define functions that are sometimes chainable.
             //gets or sets html
-            html: function(newHtml){
-                if(newHtml){ //chainable
-                    var $result = this._$el.html(newHtml);
-                    //chained result shouldn't allow access to functions we don't allow.
-                    return jQueryMediator.mediator.mediateJQueryResult($result);
-                }
-                //return the non-chainable result. e.g. string "<div>content</div>"
-                return this._$el.html();
-            },
+//            html: function(newHtml){
+//                if(newHtml){ //chainable
+//                    var $result = this._$el.html(newHtml);
+//                    //chained result shouldn't allow access to functions we don't allow.
+//                    return jQueryMediator.mediator.mediateJQueryResult($result);
+//                }
+//                //return the non-chainable result. e.g. string "<div>content</div>"
+//                return this._$el.html();
+//            },
             //gets or sets an attribute
-            attr: function(attr, value){
-                if(typeof value != "undefined"){//chainable
-                    var $result = this._$el.attr(attr, value);
-                    //chained result shouldn't allow access to functions we don't allow.
-                    return jQueryMediator.mediator.mediateJQueryResult($result);
-                }
-                //return the non-chainable result. e.g. string "attributeValue"
-                return this._$el.attr(attr);
-            }
+//            attr: function(attr, value){
+//                if(typeof value != "undefined"){//chainable
+//                    var $result = this._$el.attr(attr, value);
+//                    //chained result shouldn't allow access to functions we don't allow.
+//                    return jQueryMediator.mediator.mediateJQueryResult($result);
+//                }
+//                //return the non-chainable result. e.g. string "attributeValue"
+//                return this._$el.attr(attr);
+//            }
         },
 
         //primary mediator function for the jquery function $()
@@ -99,14 +87,25 @@ define(['jquery'], function($){
         //dynamically create the prototype by iterating over the allowed functions and assigning mediator functions to the prototype.
         //these types of functions are simply pass throughs to the underlying library.
         _createPrototypeForMediatedQueryObject: function createPrototypeForMediatedQueryObject(){
-            for(var i =0, allowedFunctionName; undefined !== (allowedFunctionName = this.allowedChainedFunctions[i]); ++i){
-                this._createChainablePrototypeFunction(allowedFunctionName);
-            }
-            for(i =0, allowedFunctionName; undefined !== (allowedFunctionName = this.allowedNonChainedFunctions[i]); ++i){
-                this._createNonChainablePrototypeFunction(allowedFunctionName);
+//            for(var i =0, allowedFunctionName; undefined !== (allowedFunctionName = this.allowedChainedFunctions[i]); ++i){
+//                this._createChainablePrototypeFunction(allowedFunctionName);
+//            }
+//            for(i =0, allowedFunctionName; undefined !== (allowedFunctionName = this.allowedNonChainedFunctions[i]); ++i){
+//                this._createNonChainablePrototypeFunction(allowedFunctionName);
+//            }
+            for(var i =0, allowedFunctionName; undefined !== (allowedFunctionName = this.allowedFunctions[i]); ++i){
+                this._createPrototypeFunction(allowedFunctionName);
             }
         },
-
+        _createPrototypeFunction: function (funcName){
+            this._MediatedQueryObject.prototype[funcName] = function(){
+                var result = this._$el[funcName].apply(this._$el, arguments);
+                if(result instanceof $){  //chained results should only have functions we allow.
+                    result = jQueryMediator.mediator.mediateJQueryResult(result);
+                }
+                return result;
+            };
+        },
         //creates a function that expects a jquery object to be the result when the underlying jquery function is executed.
         //wraps and returns the result in a MediatedQueryObject
         _createChainablePrototypeFunction: function (funcName){
@@ -144,7 +143,7 @@ define(['jquery'], function($){
         //allows the jQueryMediator to be configured at runtime.
         setConfig: function (newConfig){
             if(isConfigFrozen){return;}
-            config = $.extend({}, defaults, newConfig);
+            config = $.extend({}, defaults, newConfig);//merge newConfig with defaults.
 
             //init jQueryMediator and MediatedQueryObject
             jQueryMediator = config._jQueryMediator;
