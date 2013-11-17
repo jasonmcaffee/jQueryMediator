@@ -236,7 +236,7 @@ The other src/js code is simply there to mimic a typical project scaffold.
 ## Performance
 Performance for jQueryMediator is awesome.  Performance is only slightly slower than using jQuery directly.
 
-http://jsperf.com/jquery-mediator-vs-jquery/4
+http://jsperf.com/jquery-mediator-vs-jquery/5
 
 ## Compatibility
 jQueryMediator is written in vanilla javascript, and should work in all browsers supported by the version of jquery you are using.
