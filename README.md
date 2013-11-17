@@ -4,6 +4,34 @@ verbose syntax that resonates throughout your code base.
 
 This project provides a jQuery API mediator that can be used in a manner that is indestinguishable from jQuery.
 
+## Try it out!
+Visit this link and click Project->Fork to try it out yourself:
+https://codio.com/jasonmcaffee/jQueryMediator/master/tree/test/jquery-mediator-spec.js
+
+## Usage
+You can use the jQueryMediator in any way you see fit.
+
+Here are a few usage examples.
+### Functionaly scoped jQueryMediator as $
+```javascript
+(function($){
+    $('#someSelector').find('.some-el').html();
+})(jQueryMediator);
+```
+or
+```javascript
+function myModule(){
+    var $ = jQueryMediator;
+    $('#someSelector').find('.some-el').html();
+}
+```
+or
+```javascript
+define(['jQueryMediator'], function($){
+    $('#someSelector').find('.some-el').html();
+});
+```
+
 ## Reasons to use a Mediator
 ### Switching out third party libraries
 Ostensibly, a mediator around a third party library could allow to switch out a the third party library with another one, without
@@ -98,28 +126,7 @@ http://stackoverflow.com/questions/12534338/is-the-use-of-the-mediator-pattern-r
 #### Tapestry
 https://github.com/apache/tapestry-5/blob/5.4-js-rewrite/tapestry-core/src/main/coffeescript/META-INF/modules/core/dom.coffee
 
-## Usage
-You can use the jQueryMediator in any way you see fit.
-Here are a few usage examples.
-### Functionaly scoped jQueryMediator as $
-```javascript
-(function($){
-    $('#someSelector').find('.some-el').html();
-})(jQueryMediator);
-```
-or
-```javascript
-function myModule(){
-    var $ = jQueryMediator;
-    $('#someSelector').find('.some-el').html();
-}
-```
-or
-```javascript
-define(['jQueryMediator'], function($){
-    $('#someSelector').find('.some-el').html();
-});
-```
+
 ## Code Overview
 
 ### Specs

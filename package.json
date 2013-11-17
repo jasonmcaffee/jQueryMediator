@@ -1,0 +1,33 @@
+{
+    "name": "jQueryMediator",
+    "description": "A better Mediator for jQuery",
+    "version": "0.0.1",
+    "homepage": "https://github.com/jasonmcaffee/jQueryMediator",
+    "author": {
+        "name": "Jason McAffee",
+        "email": "jasonlmcaffee@gmail.com",
+        "url": "https://github.com/jasonmcaffee/jQueryMediator"
+    },
+    "keywords":[
+        "mediator", "jQuery Mediator", "$ Mediator", "jQuery"
+    ],
+    "readmeFilename": "README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jasonmcaffee/jQueryMediator.git"
+    },
+    "scripts": {
+        "test": "grunt test"
+    },
+    "bugs": {
+        "url": "https://github.com/jasonmcaffee/jQueryMediator/issues"
+    },
+    "devDependencies": {
+        "grunt-contrib-jasmine": "~0.4.0",
+        "grunt-contrib-watch": "0.4.4",
+        "grunt-contrib-uglify": "0.2.4",
+        "grunt": "0.4.1",
+        "handlebars": "1.0.12"
+    },
+    "dependencies": {}
+}
