@@ -26,7 +26,8 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
             },
             //demonstrate an explicit function which wraps jquery results with a mediated jquery object.
             attr: function(name, value){
-                var result = this._$el.attr(name, value);
+                //pass the correct number of parameters
+                var result = typeof value == "undefined" ? this._$el.attr(name) : this._$el.attr(name, value);
                 //when the result is an instance of jquery e.g. $el
                 //we wrap the jquery instance with the mediator so that only functions we allow are available
                 //during chaining.
@@ -86,6 +87,7 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
         });
 
         it("should support explicitly defined functions", function(){
+            //each
             var $lengthTest = $('#lengthTest');
             var eachCount = 0;
             $lengthTest.each(function(i, item){
@@ -102,6 +104,10 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
             });
             expect(eachCount).toEqual(4);
 
+            //attr
+            var $attrTest = $('#attrTest');
+            var classVal = $attrTest.attr('class');
+            expect(classVal).toEqual('val1');
 
         });
         it("should not get confused by multiple cached objects", function(){
