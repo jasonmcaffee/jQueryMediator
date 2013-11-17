@@ -8,7 +8,7 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
             'find',
             'hasClass'
         ],
-        allowedProps:[
+        allowedProperties:[
             'length'
         ],
         allowedJQueryFunctionProperties:[
@@ -61,6 +61,14 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
         it("should provide access to underlying jquery object (for emergencies)", function(){
             var $el = $('#findTest').find('.test1')._$el;
             expect($el instanceof jquery).toEqual(true);
+        });
+
+        it("should not get confused by multiple cached objects", function(){
+            var $mediatedEl1 = $('#htmlTest1');
+            var $mediatedEl2 = $('#findTest');
+            var $mediatedEl3 = $mediatedEl2.find('.test1');
+            expect($mediatedEl1.html() == $mediatedEl2.html()).toEqual(false);
+            expect($mediatedEl3.html() == $mediatedEl2.html()).toEqual(false);
         });
         
         it("should support ajax", function(){

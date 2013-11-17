@@ -37,7 +37,7 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
                     'data'
                 ],
                 //exposed properties from the jquery object.
-                allowedProps: [
+                allowedProperties: [
                     'length'  //$('#someEl').length
                 ],
                 //exposed functions and properties from the jquery function.
