@@ -1,6 +1,6 @@
 define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], function(jquery, core, jasmine, $){
     core.log('jquery mediator spec module loaded'); 
-    
+
     //test that our assumptions about how the mediator works are correct.
     //I do not intend on testing every function here, just enough to ensure that the mediator acting appropriately as a passthrough.
     describe("jquery mediator", function(){
@@ -42,6 +42,11 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
         it("should not expose jquery object functions we havent allowed when chaining is used", function(){
             expect($('#findTest').find('.test1').live).toEqual(undefined);    
         });
+
+        it("should provide access to underlying jquery object (for emergencies)", function(){
+            var $el = $('#findTest').find('.test1')._$el;
+            expect($el instanceof jquery).toEqual(true);
+        });
         
         it("should support ajax", function(){
             var receivedExpectedResult = false;
@@ -58,7 +63,6 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
                 expect(receivedExpectedResult).toEqual(true);
             });
         });
-        
         
     });
 });
