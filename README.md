@@ -1,8 +1,8 @@
-# jQuery API Mediator
-Typical mediators, for dom libraries such as jQuery, tend to poorly abstract the underlying API, and lead to an inconvenient, 
+# jQueryMediator - a better Mediator for jQuery.
+Typical mediators for dom libraries such as jQuery, tend to poorly abstract the underlying API, and lead to an inconvenient,
 verbose syntax that resonates throughout your code base.
 
-This project provides a jQuery API mediator that can be used in a manner that is indestinguishable from jQuery.
+This project provides a jQuery API mediator that can be used in a manner that is indistinguishable from jQuery.
 
 ## Try it out!
 Visit this link and click Project->Fork to try it out yourself:
@@ -14,7 +14,7 @@ You can use the jQueryMediator in any way you see fit.
 Note: usage examples assume jQueryMediator has already been configured. See Configuration section.
 
 Here are a few usage examples.
-### Functionaly scoped jQueryMediator as $
+### Functionally scoped jQueryMediator as $
 ```javascript
 (function($){
     $('#someSelector').find('.some-el').html();
@@ -40,8 +40,8 @@ You can override any functionality with your own.
 ### Basic Configuration
 Note: in the configuration examples, it is assumed that $ == jQueryMediator.
 
-#### Whitelisting allowed functions and properties
-You can whitelist the allowed properties and functions of the mediated jQuery result object and the jQuery function.
+#### White listing allowed functions and properties
+You can white list the allowed properties and functions of the mediated jQuery result object and the jQuery function.
 
 ```javascript
 $.mediator.setConfig({
@@ -79,7 +79,7 @@ ones.
 (Note: you could do this without a mediator, but it may impact the underlying library)
 
 ### See all the third party api functions you use in one place
-In the jQuery API Mediator, exposed functions are whitelisted, and those which are not are unavailable.
+In the jQuery API Mediator, exposed functions are white listed, and those which are not are unavailable.
 This can help when you are upgrading or replacing a library, as you only need to worry about the exposed functions.
 
 ### Help enforce best practices
