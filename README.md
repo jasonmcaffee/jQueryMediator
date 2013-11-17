@@ -1,4 +1,4 @@
-# jQueryMediator - a better Mediator for jQuery.
+# jQueryMediator
 Typical mediators for dom libraries such as jQuery, tend to poorly abstract the underlying API, and lead to an inconvenient,
 verbose syntax that resonates throughout your code base.
 
