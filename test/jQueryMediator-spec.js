@@ -13,7 +13,29 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
         ],
         allowedJQueryFunctionProperties:[
             'ajax'
-        ]
+        ],
+        //in explicit functions, 'this' is the mediatedQueryObject.
+        //you also have access to the underlying jquery object via this._$el
+        explicitFunctions:{
+            //demonstrates a custom each replacement
+            each: function(iterationCallback){
+                for(var i=0; i < this.length; ++i){
+                    var item = this[i];
+                    iterationCallback(i, item);
+                }
+            },
+            //demonstrate an explicit function which wraps jquery results with a mediated jquery object.
+            attr: function(name, value){
+                var result = this._$el.attr(name, value);
+                //when the result is an instance of jquery e.g. $el
+                //we wrap the jquery instance with the mediator so that only functions we allow are available
+                //during chaining.
+                if(result instanceof jquery){
+                    result = $.mediator.mediateJQueryResult(result);
+                }
+                return result;
+            }
+        }
     });
 
     //test that our assumptions about how the mediator works are correct.
@@ -63,6 +85,25 @@ define(['jquery', 'core', 'jasmine', 'base/vendor-mediator/jQueryMediator'], fun
             expect($el instanceof jquery).toEqual(true);
         });
 
+        it("should support explicitly defined functions", function(){
+            var $lengthTest = $('#lengthTest');
+            var eachCount = 0;
+            $lengthTest.each(function(i, item){
+                expect(i).toEqual(eachCount);
+                eachCount++;
+            });
+            expect(eachCount).toEqual(1);
+
+            eachCount = 0;
+
+            $lengthTest.find('li').each(function(i, item){
+                eachCount++;
+                expect(item.innerHTML).toEqual(eachCount+"");
+            });
+            expect(eachCount).toEqual(4);
+
+
+        });
         it("should not get confused by multiple cached objects", function(){
             var $mediatedEl1 = $('#htmlTest1');
             var $mediatedEl2 = $('#findTest');
