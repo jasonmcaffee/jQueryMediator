@@ -8,6 +8,18 @@ This project provides a jQuery API mediator that can be used in a manner that is
 Visit this link and click Project->Fork to try it out yourself:
 https://codio.com/jasonmcaffee/jQueryMediator/master/tree/test/jQueryMediator-spec.js
 
+## Download
+### Minified
+Minified: 1706 bytes.
+Gzipped:  343 bytes.
+
+[jQueryMediator-0.0.1.min](http://rawgithub.com/jasonmcaffee/jQueryMediator/master/dist/jQueryMediator-0.0.1.min.js)
+### Minifified With Requirejs Support
+Minified: 1744 bytes.
+Gzipped:  352 bytes.
+
+[jQueryMediator-0.0.1-requirejs-support.min](http://rawgithub.com/jasonmcaffee/jQueryMediator/master/dist/jQueryMediator-0.0.1-requirejs-support.min.js)
+
 ## Usage
 You can use the jQueryMediator in any way you see fit.
 
@@ -226,9 +238,7 @@ http://jsperf.com/jquery-mediator-vs-jquery/4
 jQueryMediator is written in vanilla javascript, and should work in all browsers supported by the version of jquery you are using.
 
 ## Dependencies
-Currently dependent on jquery and requirejs, but a non requirejs version should be available soon.
-
-In the meantime you can simply replace the requirejs define with an IIFE that passes in jQuery.
+Only dependent on jquery unless you use the requirejs-support version, in which case you'll need jquery and requirejs.
 
 ##FAQs
 ### Won't developers be confused by this?
